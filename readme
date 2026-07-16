@@ -1,0 +1,46 @@
+# Scientific Calculator (HTML + CSS + JS + PHP)
+
+A scientific calculator split across four files, with both instant client-side
+calculation and an optional server-side (PHP) evaluation path.
+
+## Files
+
+| File            | Role                                                                 |
+|-----------------|-----------------------------------------------------------------------|
+| `calc.php`     | Page shell / markup. Outputs the calculator HTML (PHP used for title, version, and to serve as the app's entry point). |
+| `calc.css`     | All visual styling (dark theme, grid layout, responsive).            |
+| `calc.js`     | UI logic + a safe recursive-descent expression parser/evaluator (no `eval()`). Handles button clicks, keyboard input, DEG/RAD toggle. |
+| `calculate.php` | JSON API endpoint. Re-implements the same expression parser in PHP and evaluates the expression server-side when the **"PHP∑"** button is pressed. |
+
+## Features
+
+- Basic operations: `+ − × ÷`, decimals, parentheses
+- Scientific functions: `sin`, `cos`, `tan`, `log` (base 10), `ln` (natural log), `√`, `x²`, `x^y`, `x!`, `1/x`
+- Constants: `π`, `e`
+- `%`, `±` (sign toggle)
+- DEG / RAD angle mode toggle
+- Keyboard support (digits, operators, Enter, Backspace, Escape)
+- AC (clear all), CE (clear entry), ⌫ (backspace)
+- **PHP∑** button: sends the current expression to `calculate.php` via `fetch()` and displays the server-computed result, proving the PHP backend is functioning independently of the JS evaluator.
+
+## How to run
+
+You need a PHP-capable web server for the PHP endpoint to work (plain file
+opening via `file://` will not execute PHP).
+
+**Option 1 — PHP built-in server (simplest):**
+
+```bash
+cd scientific-calculator
+php -S localhost:8000
+```
+
+Then open `http://localhost:8000/index.php` in your browser.
+
+**Option 2 — XAMPP / WAMP / MAMP / any Apache+PHP stack:**
+
+Copy the `scientific-calculator` folder into your server's document root
+(e.g. `htdocs/`) and visit `http://localhost/scientific-calculator/index.php`.
+
+> Note: The calculator works fully client-side (instant results on `=`) even
+> without PHP running — the PHP path is only used when you click **PHP∑**.

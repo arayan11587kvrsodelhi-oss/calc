@@ -1,0 +1,107 @@
+<?php
+// index.php — Main entry point for the Scientific Calculator
+// Serves the calculator UI. Server-side calculations (optional) go through calculate.php via AJAX.
+
+$pageTitle = "Scientific Calculator";
+$appVersion = "1.0.0";
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Calculator</title>
+<link rel="stylesheet" href="calc.css">
+</head>
+<body>
+
+  <div class="calculator" id="calculator">
+
+    <div class="header">
+      <span class="title"><?php echo htmlspecialchars($pageTitle); ?></span>
+      <div class="mode-toggle">
+        <button type="button" id="degRadToggle" class="mode-btn" data-mode="DEG">DEG</button>
+      </div>
+    </div>
+
+    <div class="display-wrap">
+      <div class="expression" id="expression"></div>
+      <input type="text" id="display" class="display" value="0" readonly autocomplete="off">
+    </div>
+
+    <div class="buttons">
+
+      <!-- Scientific function row -->
+      <div class="row scientific">
+        <button type="button" class="btn func" data-action="clear-all">AC</button>
+        <button type="button" class="btn func" data-action="clear-entry">CE</button>
+        <button type="button" class="btn func" data-action="backspace">⌫</button>
+        <button type="button" class="btn func" data-value="(">(</button>
+        <button type="button" class="btn func" data-value=")">)</button>
+      </div>
+
+      <div class="row scientific">
+        <button type="button" class="btn func" data-action="sin">sin</button>
+        <button type="button" class="btn func" data-action="cos">cos</button>
+        <button type="button" class="btn func" data-action="tan">tan</button>
+        <button type="button" class="btn func" data-action="log">log</button>
+        <button type="button" class="btn func" data-action="ln">ln</button>
+      </div>
+
+      <div class="row scientific">
+        <button type="button" class="btn func" data-action="sqrt">√</button>
+        <button type="button" class="btn func" data-action="square">x²</button>
+        <button type="button" class="btn func" data-action="power">x^y</button>
+        <button type="button" class="btn func" data-action="factorial">x!</button>
+        <button type="button" class="btn func" data-action="inverse">1/x</button>
+      </div>
+
+      <div class="row scientific">
+        <button type="button" class="btn func" data-action="pi">π</button>
+        <button type="button" class="btn func" data-action="e">e</button>
+        <button type="button" class="btn func" data-action="percent">%</button>
+        <button type="button" class="btn func" data-action="plusminus">±</button>
+        <button type="button" class="btn func" data-action="server-eval" title="Evaluate on server via PHP">PHP∑</button>
+      </div>
+
+      <!-- Standard calculator grid -->
+      <div class="row basic">
+        <button type="button" class="btn num" data-value="7">7</button>
+        <button type="button" class="btn num" data-value="8">8</button>
+        <button type="button" class="btn num" data-value="9">9</button>
+        <button type="button" class="btn op" data-value="/">÷</button>
+      </div>
+
+      <div class="row basic">
+        <button type="button" class="btn num" data-value="4">4</button>
+        <button type="button" class="btn num" data-value="5">5</button>
+        <button type="button" class="btn num" data-value="6">6</button>
+        <button type="button" class="btn op" data-value="*">×</button>
+      </div>
+
+      <div class="row basic">
+        <button type="button" class="btn num" data-value="1">1</button>
+        <button type="button" class="btn num" data-value="2">2</button>
+        <button type="button" class="btn num" data-value="3">3</button>
+        <button type="button" class="btn op" data-value="-">−</button>
+      </div>
+
+      <div class="row basic">
+        <button type="button" class="btn num" data-value="0">0</button>
+        <button type="button" class="btn num" data-value=".">.</button>
+        <button type="button" class="btn equals" data-action="equals">=</button>
+        <button type="button" class="btn op" data-value="+">+</button>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <span id="serverStatus"></span>
+      <span class="version">v<?php echo htmlspecialchars($appVersion); ?></span>
+    </div>
+
+  </div>
+
+  <script src="calc.js"></script>
+</body>
+</html>
